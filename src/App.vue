@@ -1,21 +1,20 @@
 <template>
-  <main class="home"></main>
+  <main class="home">
+    <base-header />
+  </main>
 </template>
 
 <script>
+import BaseHeader from "./components/layout/BaseHeader.vue";
 export default {
   name: "App",
-  components: {},
+  components: { BaseHeader },
 };
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.home {
+  font-family: $font-primary;
+  padding: 6rem 12rem 0;
 }
 </style>

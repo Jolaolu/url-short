@@ -1,0 +1,23 @@
+$breakpoint-small: 375px;
+$breakpoint-middle: 576px;
+$breakpoint-desktop:  1440px;
+
+@mixin screen($size, $type: max, $pixels: 600) {
+  @if $size== "mobile" {
+    @media screen and (max-width: $breakpoint-small) {
+      @content;
+    }
+  } @else if $size== "middle" {
+    @media screen and (min-width: $breakpoint-middle) {
+      @content;
+    }
+  } @else if $size== "desktop" {
+    @media screen and (min-width: $breakpoint-desktop) {
+      @content;
+    }
+  } @else if $size== "custom" {
+    @media screen and ($type + -width: $pixels + px) {
+      @content;
+    }
+  }
+}
