@@ -16,7 +16,7 @@
 
     <div class="header-auth">
       <a class="login" href="#">Login</a>
-      <a class="signup" href="#">Sign Up</a>
+      <a class="signup btn" href="#">Sign Up</a>
     </div>
   </header>
 </template>
@@ -40,11 +40,15 @@ export default defineComponent({
     display: flex;
   }
   &-logo {
+    color: black;
     margin-right: 5rem;
   }
   &-links {
     a {
       margin-right: 3rem;
+      &:hover {
+        color: $neutral-dark-blue;
+      }
     }
   }
   &-auth {

@@ -17,6 +17,7 @@
   font-size: 2rem;
   padding: 2rem;
   border-radius: 1.2rem;
+  color: $neutral-gray;
   &:focus {
     &.invalid {
       color: $secondary-color;
