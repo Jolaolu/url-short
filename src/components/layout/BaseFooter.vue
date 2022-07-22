@@ -86,13 +86,24 @@ export default defineComponent({
   background: $neutral-dark-blue;
   display: flex;
   justify-content: center;
-  @include screen(small) {
+  @include screen(custom, max, 576) {
+    flex-direction: column;
+    align-items: center;
   }
   &-links {
     display: flex;
     align-items: flex-start;
+    @include screen(custom, max, 576) {
+      flex-direction: column;
+      align-items: center;
+    }
     & > ul {
       margin-right: 10rem;
+      @include screen(custom, max, 576) {
+        margin-right: 0rem;
+        margin-bottom: 2rem;
+        text-align: center;
+      }
       li {
         color: $neutral-gray;
         font-size: 1.4rem;
@@ -125,6 +136,10 @@ export default defineComponent({
   .logo {
     margin-right: 15rem;
     color: white;
+    @include screen(custom, max, 576) {
+      margin-right: 0;
+      margin-bottom: 4rem;
+    }
   }
 }
 </style>

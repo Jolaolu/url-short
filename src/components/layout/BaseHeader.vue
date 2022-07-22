@@ -9,10 +9,10 @@
         <hamburger-icon class="" />
       </base-button>
     </div>
-    <nav :class="{ hidden: isHamburgerToggled }" class="header-nav">
+    <nav :class="{ '-hidden': isHamburgerToggled }" class="header-nav">
       <div class="header-links">
-        <!-- this should ordinarily be nuxt-link or 
-        router link but doesn't make sense to use a router
+        <!-- this should ordinarily be a 
+        router-link but doesn't make sense to use a router
          since we are not implementing other pages -->
         <a href="#">Features</a>
         <a href="#">Pricing</a>
@@ -45,10 +45,11 @@ export default defineComponent({
 .header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   font-weight: bold;
   padding: 0 12rem;
   @include screen(custom, max, 576) {
+    align-items: center;
     flex-direction: column;
     padding: 0 2rem;
   }
@@ -56,29 +57,38 @@ export default defineComponent({
     display: none;
     @include screen(custom, max, 576) {
       display: block;
-      /* width: 2rem; */
       color: $neutral-gray-violet;
     }
   }
   &-menu {
-    width: 100%;
     display: flex;
     align-items: flex-start;
     margin-bottom: 2rem;
     justify-content: space-between;
+    @include screen(custom, max, 576) {
+      width: 100%;
+    }
   }
   &-nav {
     width: 80%;
     display: flex;
+    align-items: flex-start;
     justify-content: space-between;
     @include screen(custom, max, 576) {
+      z-index: 2;
       width: 100%;
+      align-items: center;
       flex-direction: column;
       background: $primary-color-violet;
       border-radius: 1.5rem;
       color: white;
       text-align: center;
       padding: 4rem 3rem;
+    }
+    &.-hidden {
+      @include screen(custom, max, 576) {
+        display: none;
+      }
     }
   }
   &-logo {
