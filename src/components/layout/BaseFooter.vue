@@ -86,6 +86,8 @@ export default defineComponent({
   background: $neutral-dark-blue;
   display: flex;
   justify-content: center;
+  @include screen(small) {
+  }
   &-links {
     display: flex;
     align-items: flex-start;
