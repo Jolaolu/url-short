@@ -16,7 +16,7 @@
     </div>
   </div>
   <div v-if="links && links.length > 0" class="shortened-links">
-    <article class="article" v-for="(link, index) in links" :key="index">
+    <article class="link" v-for="(link, index) in links" :key="index">
       <p>{{ link.original }}</p>
       <div class="copy">
         <p>{{ link.shortened }}</p>
@@ -50,7 +50,6 @@ export default defineComponent({
       }
       isLoading.value = true;
       const shortCode = await fetchData(url);
-      console.log(shortCode);
       if (shortCode.ok) {
         if (!links.value) {
           links.value = [];
@@ -131,7 +130,7 @@ export default defineComponent({
 }
 .shortened-links {
   margin-top: 3rem;
-  .article {
+  .link {
     width: 85%;
     margin: 0 auto;
     display: flex;
