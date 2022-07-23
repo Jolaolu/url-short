@@ -73,7 +73,7 @@ export default defineComponent({
   color: $neutral-gray;
   font-family: $font-primary;
   padding-top: 6rem;
-  max-width: $breakpoint-desktop;
+  max-width: $breakpoint-desktop + px;
   font-size: $body-font-size;
   width: 100%;
   overflow: hidden;
@@ -88,17 +88,25 @@ export default defineComponent({
       margin-bottom: 12rem;
       flex-direction: column-reverse;
     }
+    @include screen(middle) {
+      padding: 12rem 5rem 15rem;
+      margin-bottom: 10rem;
+    }
     &__title {
-      font-weight: bold;
-      font-size: 8rem;
-      color: black;
-      margin-top: 3rem;
       @include screen(custom, max, 576) {
         font-size: 3rem;
         max-width: 70%;
         margin: 3rem auto;
         text-align: center;
       }
+      @include screen(middle) {
+        font-size: 5rem;
+      }
+
+      font-weight: bold;
+      font-size: 8rem;
+      color: black;
+      margin-top: 3rem;
     }
     &__text {
       max-width: 60rem;
@@ -116,6 +124,14 @@ export default defineComponent({
           position: relative;
           top: 0;
           right: -10rem;
+        }
+        @include screen(custom, min, 577) {
+          font-size: 5rem;
+        }
+        @include screen(middle) {
+          position: relative;
+          right: 0;
+          width: 100%;
         }
       }
     }

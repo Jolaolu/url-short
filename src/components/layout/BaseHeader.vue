@@ -47,11 +47,13 @@ export default defineComponent({
   justify-content: space-between;
   align-items: flex-start;
   font-weight: bold;
-  padding: 0 12rem;
+  padding: 0 2rem;
+  @include screen(custom, min, 1024) {
+    padding: 0 12rem;
+  }
   @include screen(custom, max, 576) {
     align-items: center;
     flex-direction: column;
-    padding: 0 2rem;
   }
   &-hamburger {
     display: none;
