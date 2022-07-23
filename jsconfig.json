@@ -3,6 +3,8 @@
     "target": "es5",
     "module": "esnext",
     "baseUrl": "./",
+    "jsx": "preserve",
+    "importHelpers": true,
     "moduleResolution": "node",
     "paths": {
       "@/*": [
@@ -15,5 +17,10 @@
       "dom.iterable",
       "scripthost"
     ]
-  }
+  },
+  "include": [
+    "**/*.js",
+    "**/.*.js",
+    "**/*.vue"
+  ],
 }

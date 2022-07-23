@@ -51,7 +51,7 @@ describe("LinkShortener", () => {
       wrapper.findComponent("base-input-stub").attributes("error")
     ).not.toBe("");
   });
-  it.only("displays error when no link is inputed", async () => {
+  it("displays error when no link is inputed", async () => {
     const wrapper = mountComponent();
     await wrapper.findComponent("base-button-stub").vm.$emit("click");
     await wrapper.vm.$nextTick();

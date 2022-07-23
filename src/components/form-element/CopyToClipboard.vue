@@ -25,8 +25,12 @@ export default defineComponent({
     const showCopied = ref(false);
     const timeout = ref(null);
 
-    const copyToClipboard = (data) => {
-      toClipboard(data);
+    const copyToClipboard = async (data) => {
+      try {
+        await toClipboard(data);
+      } catch (error) {
+        console.log(error);
+      }
       showCopied.value = true;
       timeout.value = setTimeout(() => {
         showCopied.value = false;

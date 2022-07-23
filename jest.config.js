@@ -5,7 +5,7 @@ module.exports = {
     ".+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$":
       "jest-transform-stub",
   },
-  collectCoverage: false,
+  collectCoverage: true,
   collectCoverageFrom: ["src/**/*.{js,vue}"],
   testEnvironment: "jsdom",
   testEnvironmentOptions: {
