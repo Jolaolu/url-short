@@ -19,30 +19,7 @@
       </div>
     </section>
     <section class="home-statistics">
-      <div class="home-shortener">
-        <div class="home-shortener__form">
-          <base-input
-            class="home-shortener__form-input"
-            @update:modelValue="(newValue) => (link = newValue)"
-            :modelValue="link"
-            :error="error"
-          />
-          <base-button
-            @click="shortenLink(link)"
-            class="home-shortener__form-button btn"
-            >Shorten It!</base-button
-          >
-        </div>
-      </div>
-      <div v-if="links && links.length > 0" class="home-shortened-links">
-        <article class="article" v-for="(link, index) in links" :key="index">
-          <p>{{ link.original }}</p>
-          <div class="copy">
-            <p>{{ link.shortened }}</p>
-            <copy-to-clipboard :text-to-copy="link.shortened" />
-          </div>
-        </article>
-      </div>
+      <link-shortener />
       <div class="home-statistics-content">
         <h2 class="home-statistics-title">Advanced Statistics</h2>
         <p class="home-statistics-subtitle">
@@ -68,60 +45,24 @@
 </template>
 
 <script>
-import { defineComponent, ref, onMounted } from "vue";
-import { fetchData } from "./services";
+import { defineComponent } from "vue";
 import { cardsContent } from "./helpers";
 import BaseHeader from "./components/layout/BaseHeader.vue";
-import BaseInput from "./components/form-element/BaseInput.vue";
-import BaseButton from "./components/form-element/BaseButton.vue";
 import BaseFooter from "./components/layout/BaseFooter.vue";
 import BaseCard from "./components/BaseCard.vue";
-import CopyToClipboard from "./components/form-element/CopyToClipboard.vue";
+import LinkShortener from "./components/LinkShortener.vue";
 
 export default defineComponent({
   name: "App",
   components: {
     BaseHeader,
-    BaseInput,
-    BaseButton,
     BaseFooter,
     BaseCard,
-    CopyToClipboard,
+    LinkShortener,
   },
   setup() {
-    const links = ref(null);
-    const link = ref("");
-    const error = ref("");
-
-    const shortenLink = async (url) => {
-      if (!url) {
-        error.value = "Please add a link";
-        return;
-      }
-      const shortCode = await fetchData(url);
-      if (shortCode.ok) {
-        if (!links.value) {
-          links.value = [];
-        }
-        links.value.push({
-          original: url,
-          shortened: shortCode.result.short_link,
-        });
-        sessionStorage.setItem("shortened-links", JSON.stringify(links.value));
-      } else {
-        error.value = "Could not shorten the url";
-      }
-    };
-
-    onMounted(() => {
-      links.value = JSON.parse(sessionStorage.getItem("shortened-links"));
-    });
     return {
-      error,
-      link,
-      links,
       cardsContent,
-      shortenLink,
     };
   },
 });
@@ -227,94 +168,7 @@ export default defineComponent({
       }
     }
   }
-  &-shortener {
-    width: 85%;
-    margin: 0 auto;
-    padding: 0 4rem;
-    display: flex;
-    align-items: center;
-    height: 16rem;
-    z-index: 2;
-    background: url("~assets/images/bg-shorten-desktop.svg"),
-      $primary-color-violet;
-    border-radius: 1rem;
-    background-size: cover;
-    margin-top: -13rem;
-    @include screen(custom, max, 576) {
-      background-image: url("~assets/images/bg-shorten-mobile.svg");
-      background-color: $primary-color-violet;
-      padding: 2.5rem 2rem;
-    }
-    &__form {
-      display: flex;
-      align-items: flex-start;
-      width: 100%;
-      @include screen(custom, max, 576) {
-        flex-direction: column;
-      }
-      &-input {
-        width: 95%;
-        @include screen(custom, max, 576) {
-          width: 100%;
-          margin-bottom: 1rem;
-        }
-      }
-      &-button {
-        border-radius: 1rem;
-        background: $primary-color-cyan;
-        color: white;
-        padding: 2rem 4rem;
-        font-weight: bold;
-        width: 18%;
-        @include screen(custom, max, 576) {
-          width: 100%;
-          margin-top: 1rem;
-          padding-top: 1.5rem;
-          padding-bottom: 1.5rem;
-        }
-      }
-    }
-  }
-  &-shortened-links {
-    margin-top: 3rem;
-    .article {
-      width: 85%;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      background: white;
-      padding: 1rem 2rem;
-      margin-bottom: 2rem;
-      @include screen(custom, max, 576) {
-      }
-      p {
-        font-size: 1.6rem;
-        color: $neutral-dark-blue;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        white-space: nowrap;
-        overflow: hidden;
-        max-width: 75%;
-      }
-    }
-    .copy {
-      display: flex;
-      p {
-        color: $primary-color-cyan;
-      }
-      button {
-        margin-left: 2rem;
-        padding: 0.5rem 1rem;
-        font-size: 1.4rem;
-        border-radius: 0.5rem;
-        color: white;
-        background-color: $primary-color-cyan;
-        &.copied {
-          background: $neutral-dark-violet;
-        }
-      }
-    }
-  }
+
   &-cta {
     background-size: cover;
     height: 25rem;

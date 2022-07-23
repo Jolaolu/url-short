@@ -1,15 +1,15 @@
 <template>
   <base-button
+    ref="button"
     :class="{ copied: showCopied }"
     class="copy"
     @click="copyToClipboard(textToCopy)"
   >
-    <span v-if="showCopied">copied!</span>
-    <span v-else> copy </span>
+    {{ showCopied ? "copied!" : "copy" }}
   </base-button>
 </template>
 <script>
-import { defineComponent, onBeforeUnmount, ref } from "vue";
+import { defineComponent, ref, onBeforeUnmount } from "vue";
 import { toClipboard } from "@soerenmartius/vue3-clipboard";
 import BaseButton from "./BaseButton.vue";
 
@@ -43,8 +43,3 @@ export default defineComponent({
   },
 });
 </script>
-<style lang="scss">
-.copy {
-  width: 8rem;
-}
-</style>
